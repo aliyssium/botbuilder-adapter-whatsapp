@@ -1,4 +1,4 @@
-# botbuilder-adapter-whatsapp
+# botbuilder-adapter-whatsapp - WIP
 
 Connect [Botkit](https://www.npmjs.com/package/botkit) or [BotBuilder](https://www.npmjs.com/package/botbuilder) to
 WhatsApp.
