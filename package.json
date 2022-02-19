@@ -15,7 +15,7 @@
 		"pack": "npm pack"
 	},
 	"publishConfig": {
-		"aliyss:registry": "https://npm.pkg.github.com/"
+		"aliyssium:registry": "https://npm.pkg.github.com/"
 	},
 	"repository": {
 		"type": "git",
