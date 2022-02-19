@@ -1,5 +1,5 @@
 {
-	"name": "@aliyssium/botbuilder-adapter-whatsapp",
+	"name": "botbuilder-adapter-whatsapp",
 	"version": "1.0.0",
 	"description": "",
 	"main": "lib/index.js",
@@ -15,7 +15,7 @@
 		"pack": "npm pack"
 	},
 	"publishConfig": {
-		"@aliyssium:registry": "https://npm.pkg.github.com"
+		"aliyss:registry": "https://npm.pkg.github.com/"
 	},
 	"repository": {
 		"type": "git",
