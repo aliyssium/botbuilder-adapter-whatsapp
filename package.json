@@ -1,5 +1,5 @@
 {
-	"name": "botbuilder-adapter-whatsapp",
+	"name": "@aliyssium/botbuilder-adapter-whatsapp",
 	"version": "1.0.2",
 	"description": "",
 	"main": "lib/index.js",
