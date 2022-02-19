@@ -1,6 +1,6 @@
 {
 	"name": "@aliyssium/botbuilder-adapter-whatsapp",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "",
 	"main": "lib/index.js",
 	"typings": "./lib/index.d.ts",
@@ -18,10 +18,9 @@
 		"@aliyssium:registry": "https://npm.pkg.github.com/"
 	},
 	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/aliyssium/botbuilder-adapter-whatsapp.git"
+		"url": "git://github.com/aliyssium/botbuilder-adapter-whatsapp.git"
 	},
-	"author": "",
+	"author": "aliyss",
 	"license": "ISC",
 	"bugs": {
 		"url": "https://github.com/aliyssium/botbuilder-adapter-whatsapp/issues"
