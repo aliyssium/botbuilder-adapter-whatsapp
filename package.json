@@ -48,7 +48,6 @@
 		"typescript": "^4.2.4"
 	},
 	"dependencies": {
-		"@adiwajshing/baileys": "git+ssh://git@github.com:adiwajshing/baileys.git",
 		"botkit": "^4.10.0",
 		"qrcode": "^1.5.0",
 		"qrcode-terminal": "^0.12.0"
