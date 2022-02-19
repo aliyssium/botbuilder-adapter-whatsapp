@@ -175,18 +175,22 @@ export class WhatsAppAdapter extends BotAdapter {
 		}
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	public continueConversation(reference: Partial<ConversationReference>, logic: (revocableContext: TurnContext) => Promise<void>): Promise<void> {
 		return Promise.resolve(undefined);
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	public deleteActivity(context: TurnContext, reference: Partial<ConversationReference>): Promise<void> {
 		return Promise.resolve(undefined);
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	public sendActivities(context: TurnContext, activities: Partial<Activity>[]): Promise<ResourceResponse[]> {
 		return Promise.resolve([]);
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	public updateActivity(context: TurnContext, activity: Partial<Activity>): Promise<ResourceResponse | void> {
 		return Promise.resolve(undefined);
 	}

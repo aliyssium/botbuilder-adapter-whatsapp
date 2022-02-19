@@ -17,6 +17,7 @@
 			// add path to @types
 			"node_modules/@types"
 		],
+		"skipLibCheck": true,
 		"baseUrl": "./",
 		"paths": {
 			"*": [
@@ -46,5 +47,8 @@
 	},
 	"include": [
 		"src/**/*"
+	],
+	"exclude": [
+		"node_modules"
 	]
 }
