@@ -1,0 +1,53 @@
+{
+	"name": "botbuilder-adapter-whatsapp",
+	"version": "1.0.0",
+	"description": "",
+	"main": "lib/index.js",
+	"typings": "./lib/index.d.ts",
+	"files": [
+		"/lib",
+		"/src"
+	],
+	"scripts": {
+		"build": "tsc",
+		"test": "tsc ; nyc mocha tests/*.tests.js",
+		"eslint": "./node_modules/.bin/eslint --fix src/*",
+		"pack": "npm pack"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/aliyssium/botbuilder-adapter-whatsapp.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/aliyssium/botbuilder-adapter-whatsapp/issues"
+	},
+	"homepage": "https://github.com/aliyssium/botbuilder-adapter-whatsapp#readme",
+	"devDependencies": {
+		"@types/node": "^17.0.0",
+		"@types/qrcode": "^1.4.2",
+		"@typescript-eslint/eslint-plugin": "^4.24.0",
+		"@typescript-eslint/parser": "^4.24.0",
+		"esbuild-node-tsc": "^1.8.2",
+		"eslint": "^7.26.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-config-standard": "^16.0.2",
+		"eslint-plugin-import": "^2.23.2",
+		"eslint-plugin-node": "^11.1.0",
+		"eslint-plugin-prettier": "^3.4.0",
+		"eslint-plugin-promise": "^4.2.1",
+		"nodemon": "^2.0.15",
+		"pino-pretty": "^7.3.0",
+		"ts-node": "^9.1.1",
+		"ts-node-dev": "^1.1.6",
+		"tsconfig-paths": "^3.12.0",
+		"typescript": "^4.2.4"
+	},
+	"dependencies": {
+		"@adiwajshing/baileys": "github:adiwajshing/baileys",
+		"botkit": "^4.10.0",
+		"qrcode": "^1.5.0",
+		"qrcode-terminal": "^0.12.0"
+	}
+}

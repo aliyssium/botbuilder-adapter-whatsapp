@@ -1,0 +1,15 @@
+
+# Node.js
+node_modules/*
+package-lock.json
+package.json
+
+# TypeScript
+/dist
+/tsconfig.json
+/tsconfig.eslint.json
+
+coverage/*
+node_modules/*
+build/*
+.eslintrc.js

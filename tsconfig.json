@@ -1,0 +1,50 @@
+{
+	"compilerOptions": {
+		"target": "es2017",
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"lib": [
+			"es2017",
+			"dom"
+		],
+		"sourceMap": true,
+		"rootDir": "./src",
+		"types": [
+			// add node as an option
+			"node"
+		],
+		"typeRoots": [
+			// add path to @types
+			"node_modules/@types"
+		],
+		"baseUrl": "./",
+		"paths": {
+			"*": [
+				"src/@types/*"
+			],
+			"src/*": [
+				"./src/*"
+			]
+		},
+		"declaration": true
+		/* Generates corresponding '.d.ts' file. */,
+		"declarationMap": true
+		/* Generates a sourcemap for each corresponding '.d.ts' file. */,
+		"outDir": "./lib"
+		/* Redirect output structure to the directory. */,
+		"strict": true
+		/* Enable all strict type-checking options. */,
+		"esModuleInterop": true,
+		"experimentalDecorators": true
+		/* Enables experimental support for ES7 decorators. */,
+		"emitDecoratorMetadata": true
+		/* Enables experimental support for emitting type metadata for decorators. */,
+		/* Advanced Options */
+		"forceConsistentCasingInFileNames": true
+		/* Disallow inconsistently-cased references to the same file. */,
+		"resolveJsonModule": true
+	},
+	"include": [
+		"src/**/*"
+	]
+}
