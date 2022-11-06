@@ -123,7 +123,7 @@ export class WhatsAppAdapter extends BotAdapter {
 						conversationType: 'default'
 					},
 					from: {
-						id: message.key.fromMe ? '41786932427@s.whatsapp.net' : message.key.participant || message.key.remoteJid || '',
+						id: message.key.fromMe ? '<yourphonenumber>@s.whatsapp.net' : message.key.participant || message.key.remoteJid || '',
 						name: message.pushName || ''
 					},
 					recipient: {
