@@ -12,7 +12,7 @@ framework to build bots that work with Whatsapp.
 Add this package to your project using npm:
 
 ```bash
-npm install --save botbuilder-adapter-whatsapp
+npm install --save @aliyssium/botbuilder-adapter-whatsapp
 ```
 
 Import the adapter class into your code:

@@ -5,8 +5,11 @@
 import { Activity, ActivityTypes, BotAdapter, ConversationReference, ResourceResponse, TurnContext } from 'botbuilder';
 import makeWASocket, {
 	AuthenticationCreds,
-	AuthenticationState,
-	DisconnectReason, initAuthCreds, proto, SignalDataTypeMap
+	AuthenticationState, BufferJSON,
+	DisconnectReason,
+	initAuthCreds,
+	proto,
+	SignalDataTypeMap
 } from '@adiwajshing/baileys';
 import { Boom } from '@hapi/boom';
 import { WhatsAppClient } from './utils/WhatsAppClient';
@@ -21,7 +24,7 @@ export class WhatsAppAdapter extends BotAdapter {
 	 * Name used by Botkit plugin loader
 	 * @ignore
 	 */
-	public name = 'WhatsApp Adapter';
+	public name;
 	private options: IWhatsAppAdapterOptions;
 	private whatsapp: WhatsAppClient | undefined;
 	private KEY_MAP: { [T in keyof SignalDataTypeMap]: string } = {
@@ -35,11 +38,13 @@ export class WhatsAppAdapter extends BotAdapter {
 
 	/**
 	 * Create a WhatsApp adapter.
+	 * @param name Name of the adapter to identify it later on
 	 * @param options An object containing API credentials, a webhook verification token and other options
 	 */
-	public constructor(options: IWhatsAppAdapterOptions) {
+	public constructor(name: string, options: IWhatsAppAdapterOptions) {
 		super();
 
+		this.name = name;
 		this.options = options;
 
 		/*
@@ -98,6 +103,35 @@ export class WhatsAppAdapter extends BotAdapter {
 	public createSocketServer(logic: (turnContext: TurnContext) => Promise<any>): void {
 
 		const { state, saveState } = this.updateAuthState();
+		const activity: Activity = {
+			from: {
+				id: this.name,
+				name: this.name
+			},
+			recipient: {
+				id: this.name,
+				name: this.name
+			},
+			callerId: this.name,
+			channelId: this.name,
+			conversation: {
+				id: this.name,
+				isGroup: false,
+				name: this.name,
+				conversationType: 'event'
+			},
+			label: 'auth',
+			listenFor: [],
+			localTimezone: '',
+			serviceUrl: '',
+			text: JSON.stringify(this.options.auth),
+			type: ActivityTypes.Event,
+			valueType: 'auth',
+			value: this.options.auth
+		};
+
+		const context = new TurnContext(this, activity as Activity);
+		this.runMiddleware(context, logic).catch((err) => { console.error(err.toString()); });
 
 		this.whatsapp = makeWASocket({
 			auth: state
@@ -123,7 +157,7 @@ export class WhatsAppAdapter extends BotAdapter {
 						conversationType: 'default'
 					},
 					from: {
-						id: message.key.fromMe ? '41786932427@s.whatsapp.net' : message.key.participant || message.key.remoteJid || '',
+						id: message.key.fromMe ? '[self]@s.whatsapp.net' : message.key.participant || message.key.remoteJid || '',
 						name: message.pushName || ''
 					},
 					recipient: {
@@ -144,6 +178,35 @@ export class WhatsAppAdapter extends BotAdapter {
 		this.whatsapp.ev.on('connection.update', async (update) => {
 			if (update.qr) {
 				this.options.qr = update.qr;
+				const activity: Activity = {
+					from: {
+						id: this.name,
+						name: this.name
+					},
+					recipient: {
+						id: this.name,
+						name: this.name
+					},
+					callerId: this.name,
+					channelId: this.name,
+					conversation: {
+						id: this.name,
+						isGroup: false,
+						name: this.name,
+						conversationType: 'event'
+					},
+					label: 'qr',
+					listenFor: [],
+					localTimezone: '',
+					serviceUrl: '',
+					text: this.options.qr,
+					type: ActivityTypes.Event,
+					valueType: 'qr',
+					value: this.options.qr
+				};
+
+				const context = new TurnContext(this, activity as Activity);
+				this.runMiddleware(context, logic).catch((err) => { console.error(err.toString()); });
 			}
 			const { connection, lastDisconnect } = update;
 			if (connection === 'close') {
@@ -156,6 +219,36 @@ export class WhatsAppAdapter extends BotAdapter {
 			} else if (connection === 'open') {
 				console.log('opened connection');
 			}
+
+			const activity: Activity = {
+				from: {
+					id: this.name,
+					name: this.name
+				},
+				recipient: {
+					id: this.name,
+					name: this.name
+				},
+				callerId: this.name,
+				channelId: this.name,
+				conversation: {
+					id: this.name,
+					isGroup: false,
+					name: this.name,
+					conversationType: 'event'
+				},
+				label: 'log',
+				listenFor: [],
+				localTimezone: '',
+				serviceUrl: '',
+				text: `Connection: ${connection}`,
+				type: ActivityTypes.Event,
+				valueType: 'connection',
+				value: connection
+			};
+
+			const context = new TurnContext(this, activity as Activity);
+			this.runMiddleware(context, logic).catch((err) => { console.error(err.toString()); });
 		});
 
 		this.whatsapp.ev.on('creds.update', saveState);
@@ -201,12 +294,16 @@ export class WhatsAppAdapter extends BotAdapter {
 
 		// save the authentication state to a file
 		const saveState = () => {
-			this.options.auth = { creds, keys };
+			this.options.auth = JSON.stringify({ creds, keys }, BufferJSON.replacer, 2);
 		};
 
 		if (this.options.auth) {
-			creds = this.options.auth.creds;
-			keys = this.options.auth.keys;
+			const result = JSON.parse(
+				this.options.auth,
+				BufferJSON.reviver
+			)
+			creds = result.creds;
+			keys = result.keys;
 		} else {
 			creds = initAuthCreds();
 			keys = {};
@@ -256,7 +353,7 @@ export interface IWhatsAppAdapterOptions {
 	/**
 	 * Authentication Data for the connection to the WhatsApp Client
 	 */
-	auth?: AuthenticationState;
+	auth?: string;
 
 	/**
 	 * QR Data for the connection to the WhatsApp Client
